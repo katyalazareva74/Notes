@@ -19,14 +19,10 @@ def id_data():
     if os.path.exists(filename):   
         with open(filename, "r", newline="") as file:
             df = pd.read_csv(file, sep=';')
-            df['Date'] = pd.to_datetime(df['Date'])
-            df=df.sort_values (by='ID')
-            print(df)
             if(df.empty):
                 return 1
             else:
-                col=df.shape [0]
-                id = df.at[col-1, 'ID']
-                return id+1
+                max = df['ID'].max()
+                return max+1
     else:
-        print('Файл не найден.')
+        print('Файл не найден\n')
